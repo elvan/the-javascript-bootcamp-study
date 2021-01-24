@@ -1,11 +1,4 @@
-// @ts-check
-
 class Timer {
-  /**
-   * @param {HTMLElement} durationInput
-   * @param {HTMLElement} startButton
-   * @param {HTMLElement} pauseButton
-   */
   constructor(durationInput, startButton, pauseButton) {
     this.durationInput = durationInput;
     this.startButton = startButton;
@@ -25,7 +18,8 @@ class Timer {
   };
 
   tick = () => {
-    console.log('tick');
+    const timeRemaining = parseFloat(this.durationInput.value);
+    this.durationInput.value = timeRemaining - 1;
   };
 }
 
