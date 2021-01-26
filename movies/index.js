@@ -29,16 +29,19 @@ const dropdown = document.querySelector('.dropdown');
 const resultWrapper = document.querySelector('.results');
 
 const onInput = async (event) => {
+  resultWrapper.innerHTML = '';
+
   const movies = await fetchData(event.target.value);
 
   dropdown.classList.add('is-active');
 
   for (let movie of movies) {
     const option = document.createElement('a');
+    const imgSrc = movie.Poster == 'N/A' ? '' : movie.Poster;
 
     option.classList.add('dropdown-item');
     option.innerHTML = `
-      <img src="${movie.Poster}" />
+      <img src="${imgSrc}" />
       ${movie.Title}
     `;
 
