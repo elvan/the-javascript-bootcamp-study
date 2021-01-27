@@ -1,1 +1,1 @@
-# the-modern-javascript-bootcamp-study
+# the-javascript-bootcamp-study
