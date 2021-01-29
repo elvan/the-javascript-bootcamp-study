@@ -1,1 +1,3 @@
-console.log('Hi there!');
+const message = require('./myscript');
+
+console.log(message);
