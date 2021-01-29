@@ -10,20 +10,27 @@
       integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A=="
       crossorigin="anonymous"
     />
+    <style>
+      .row {
+        margin-top: 25vh;
+      }
+    </style>
   </head>
   <body>
     <div class="row">
       <div class="col s8 offset-s2">
-        <div class="card-panel">
+        <div id="message-form" class="card-panel">
           <form action="">
             <label for="message">Enter a Secret Message</label>
             <input id="message" type="text" />
             <button class="btn">Create</button>
           </form>
         </div>
-        <div>
-          Share this link with a friend
-          <input type="text" id="link-input" />
+        <div id="link-form" class="card-panel hide">
+          <div>
+            Share this link with a friend
+            <input type="text" id="link-input" />
+          </div>
         </div>
       </div>
     </div>
