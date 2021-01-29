@@ -177,3 +177,15 @@ World.add(world, goal);
 const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 3);
 
 World.add(world, ball);
+
+document.addEventListener('keydown', (event) => {
+  console.log(event);
+  if (event.key == 'ArrowRight') {
+  }
+  if (event.key == 'ArrowLeft') {
+  }
+  if (event.key == 'ArrowUp') {
+  }
+  if (event.key == 'ArrowDown') {
+  }
+});
