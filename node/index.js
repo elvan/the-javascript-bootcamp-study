@@ -1,3 +1,5 @@
-const message = require('./myscript');
+// const message = require('./myscript');
 
-console.log(message);
+// console.log(message);
+
+console.log(arguments);
