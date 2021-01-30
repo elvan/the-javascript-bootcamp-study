@@ -1,5 +1,3 @@
-// const message = require('./myscript');
+require('./myscript');
 
-// console.log(message);
-
-console.log(arguments);
+console.log(require.cache);
