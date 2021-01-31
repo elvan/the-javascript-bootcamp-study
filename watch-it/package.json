@@ -11,5 +11,11 @@
   "license": "MIT",
   "bin": {
     "watchit": "index.js"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.1"
+  },
+  "devDependencies": {
+    "@types/chokidar": "^2.1.3"
   }
 }
