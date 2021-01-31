@@ -5,6 +5,7 @@ const chokidar = require('chokidar');
 const program = require('caporal');
 const fs = require('fs');
 const { spawn } = require('child_process');
+const chalk = require('chalk');
 
 program
   .name('watchit')
@@ -19,8 +20,13 @@ program
       throw new Error(`Could not find the file ${name}`);
     }
 
+    let proc;
     const start = debounce(() => {
-      spawn('node', [name], { stdio: 'inherit' });
+      if (proc) {
+        proc.kill();
+      }
+      console.log(chalk.green('>> Starting Process <<'));
+      proc = spawn('node', [name], { stdio: 'inherit' });
     }, 1000);
 
     chokidar
