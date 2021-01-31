@@ -13,9 +13,11 @@
     "watchit": "index.js"
   },
   "dependencies": {
-    "chokidar": "^3.5.1"
+    "chokidar": "^3.5.1",
+    "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
-    "@types/chokidar": "^2.1.3"
+    "@types/chokidar": "^2.1.3",
+    "@types/lodash.debounce": "^4.0.6"
   }
 }
