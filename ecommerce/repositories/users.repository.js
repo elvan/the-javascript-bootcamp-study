@@ -15,6 +15,12 @@ class UsersRepository {
     }
   }
 
+  async getOne(id) {
+    const records = await this.getAll();
+
+    return records.find((record) => record.id === id);
+  }
+
   async getAll() {
     return JSON.parse(
       await fs.promises.readFile(this.filename, {
@@ -47,11 +53,8 @@ class UsersRepository {
 const test = async () => {
   const repo = new UsersRepository('data/users.json');
 
-  repo.create({ email: 'test@example.com', password: 'pswd1234' });
-
-  const users = await repo.getAll();
-
-  console.log(users);
+  const user = await repo.getOne('4dc180be');
+  console.log(user);
 };
 
 test();
