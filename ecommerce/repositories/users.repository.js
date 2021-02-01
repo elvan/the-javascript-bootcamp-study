@@ -38,6 +38,18 @@ class UsersRepository {
     await this.writeAll(records);
   }
 
+  async update(id, attrs) {
+    const records = await this.getAll();
+    const record = records.find((record) => record.id === id);
+
+    if (!record) {
+      throw new Error(`Record with id ${id} not found`);
+    }
+
+    Object.assign(record, attrs);
+    await this.writeAll(records);
+  }
+
   async delete(id) {
     const records = await this.getAll();
     const filteredRecords = records.filter((record) => record.id != id);
@@ -63,7 +75,7 @@ const test = async () => {
   // const users = await repo.getAll();
   // console.log(users);
 
-  await repo.delete('c3352f7b');
+  await repo.update('a8d4864a', { password: 'admin123' });
 };
 
 test();
