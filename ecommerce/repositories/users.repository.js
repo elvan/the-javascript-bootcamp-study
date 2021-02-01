@@ -38,6 +38,12 @@ class UsersRepository {
     await this.writeAll(records);
   }
 
+  async delete(id) {
+    const records = await this.getAll();
+    const filteredRecords = records.filter((record) => record.id != id);
+    await this.writeAll(filteredRecords);
+  }
+
   async writeAll(records) {
     await fs.promises.writeFile(
       this.filename,
@@ -53,8 +59,11 @@ class UsersRepository {
 const test = async () => {
   const repo = new UsersRepository('data/users.json');
 
-  const user = await repo.getOne('4dc180be');
-  console.log(user);
+  // await repo.create({ email: 'test@example.com', password: 'pswd1234' });
+  // const users = await repo.getAll();
+  // console.log(users);
+
+  await repo.delete('c3352f7b');
 };
 
 test();
