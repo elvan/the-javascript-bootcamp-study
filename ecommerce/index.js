@@ -14,7 +14,7 @@ app.use(
 
 const port = 3000;
 
-app.get('/', (req, res) => {
+app.get('/signup', (req, res) => {
   res.send(`
     <div>
       Your ID is: ${req.session.userID}
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.post('/', async (req, res) => {
+app.post('/signup', async (req, res) => {
   const { email, password, passwordConfirmation } = req.body;
   const existingUser = await usersRepo.getOneBy({ email: email });
 
@@ -45,6 +45,23 @@ app.post('/', async (req, res) => {
   req.session.userID = user.id;
 
   res.send('Account Created!');
+});
+
+app.get('/signin', (req, res) => {
+  res.send(`
+    <div>
+      <form method="POST">
+        <input name="email" type="text" placeholder="email" />
+        <input name="password" type="password" placeholder="password" />
+        <button>Sign In</button>
+      </form>
+    </div>
+  `);
+});
+
+app.get('/signout', (req, res) => {
+  req.session = null;
+  res.send('You are logged out');
 });
 
 app.listen(port, () => {
