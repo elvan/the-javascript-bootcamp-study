@@ -19,7 +19,7 @@ app.use(
 app.use(authRouter);
 
 app.get('/', (req, res) => {
-  res.send(`Your ID is: ${req.session.userID}`);
+  res.send(`<h4>Your ID is: ${req.session.userID}</h4>`);
 });
 
 app.listen(port, () => {
