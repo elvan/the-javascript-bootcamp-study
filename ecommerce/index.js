@@ -16,6 +16,10 @@ app.use(
 
 const port = 3000;
 
+app.get('/', (req, res) => {
+  res.send(`Your ID is: ${req.session.userID}`);
+});
+
 app.get('/signup', (req, res) => {
   res.send(`
     <div>
