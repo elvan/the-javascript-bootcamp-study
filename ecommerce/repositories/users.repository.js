@@ -21,6 +21,24 @@ class UsersRepository {
     return records.find((record) => record.id === id);
   }
 
+  async getOneBy(filters) {
+    const records = await this.getAll();
+
+    for (let record of records) {
+      let found = true;
+
+      for (let key in filters) {
+        if (record[key] !== filters[key]) {
+          found = false;
+        }
+      }
+
+      if (found) {
+        return record;
+      }
+    }
+  }
+
   async getAll() {
     return JSON.parse(
       await fs.promises.readFile(this.filename, {
@@ -75,7 +93,8 @@ const test = async () => {
   // const users = await repo.getAll();
   // console.log(users);
 
-  await repo.update('a8d4864a', { password: 'admin123' });
+  const user = await repo.getOneBy({ email: 'test@example.com' });
+  console.log(user);
 };
 
 test();
