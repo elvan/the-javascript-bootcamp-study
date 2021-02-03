@@ -41,7 +41,7 @@ router.post(
 );
 
 router.get('/signin', (req, res) => {
-  res.send(signinView());
+  res.send(signinView({}));
 });
 
 router.post(
@@ -50,7 +50,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors);
+      return res.send(signinView({ errors }));
     }
 
     const user = await usersRepo.getOneBy({ email: req.body.email });
