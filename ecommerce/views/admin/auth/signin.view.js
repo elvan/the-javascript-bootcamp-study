@@ -1,12 +1,5 @@
 const layout = require('../admin.layout');
-
-const getError = (errors, prop) => {
-  try {
-    return errors.mapped()[prop].msg;
-  } catch (err) {
-    return '';
-  }
-};
+const getError = require('../../error.helper');
 
 module.exports = ({ errors }) => {
   return layout({
