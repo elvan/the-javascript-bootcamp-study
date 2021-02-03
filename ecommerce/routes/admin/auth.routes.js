@@ -15,7 +15,7 @@ const {
 const router = express.Router();
 
 router.get('/signup', (req, res) => {
-  res.send(signupView({ req: req }));
+  res.send(signupView({ req }));
 });
 
 router.post(
@@ -23,10 +23,9 @@ router.post(
   [validateEmail, validatePassword, validatePasswordConfirmation],
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
 
-    if (errors) {
-      return res.send('Some validations are failed');
+    if (!errors.isEmpty()) {
+      return res.send(signupView({ req, errors }));
     }
 
     const { email, password } = req.body;
