@@ -16,9 +16,19 @@ router.get('/signup', (req, res) => {
 router.post(
   '/signup',
   [
-    check('email').trim().normalizeEmail().isEmail(),
-    check('password').trim().isLength({ min: 4, max: 20 }),
-    check('passwordConfirmation').trim().isLength({ min: 4, max: 20 }),
+    check('email')
+      .trim()
+      .normalizeEmail()
+      .isEmail()
+      .withMessage('Must be a valid email'),
+    check('password')
+      .trim()
+      .isLength({ min: 4, max: 20 })
+      .withMessage('Must be between 4 and 20 characters'),
+    check('passwordConfirmation')
+      .trim()
+      .isLength({ min: 4, max: 20 })
+      .withMessage('Must be between 4 and 20 characters'),
   ],
   async (req, res) => {
     const errors = validationResult(req);
