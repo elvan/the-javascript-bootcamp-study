@@ -20,7 +20,13 @@ router.post(
       .trim()
       .normalizeEmail()
       .isEmail()
-      .withMessage('Must be a valid email'),
+      .withMessage('Must be a valid email')
+      .custom(async (email) => {
+        const existingUser = await usersRepo.getOneBy({ email });
+        if (existingUser) {
+          throw new Error('Email in use');
+        }
+      }),
     check('password')
       .trim()
       .isLength({ min: 4, max: 20 })
@@ -28,7 +34,12 @@ router.post(
     check('passwordConfirmation')
       .trim()
       .isLength({ min: 4, max: 20 })
-      .withMessage('Must be between 4 and 20 characters'),
+      .withMessage('Must be between 4 and 20 characters')
+      .custom((passwordConfirmation, { req }) => {
+        if (req.body.password !== passwordConfirmation) {
+          throw new Error('Passwords must match');
+        }
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -38,16 +49,7 @@ router.post(
       return res.send('Some validations are failed');
     }
 
-    const { email, password, passwordConfirmation } = req.body;
-    const existingUser = await usersRepo.getOneBy({ email: email });
-
-    if (existingUser) {
-      return res.send('Email in use');
-    }
-
-    if (password !== passwordConfirmation) {
-      return res.send('Passwords must match');
-    }
+    const { email, password } = req.body;
 
     const user = await usersRepo.create({ email: email, password: password });
 
