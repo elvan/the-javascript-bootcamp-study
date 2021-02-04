@@ -8,6 +8,7 @@ const app = express();
 const port = 3000;
 
 const authRouter = require('./routes/admin/auth.routes');
+const productsRouter = require('./routes/admin/product.routes');
 
 app.use(express.static('public'));
 
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use(authRouter);
+app.use(productsRouter);
 
 app.get('/', (req, res) => {
   res.send(`<h4>Your ID is: ${req.session.userID}</h4>`);
