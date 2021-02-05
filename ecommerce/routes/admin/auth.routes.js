@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 const express = require('express');
-const { check, validationResult } = require('express-validator');
 
 const { handleErrors } = require('./admin.middlewares');
 const usersRepo = require('../../repositories/users.repository');
