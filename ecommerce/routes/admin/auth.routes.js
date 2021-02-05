@@ -3,6 +3,7 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 
+const { handleErrors } = require('./admin.middlewares');
 const usersRepo = require('../../repositories/users.repository');
 const signinView = require('../../views/admin/auth/signin.view');
 const signupView = require('../../views/admin/auth/signup.view');
@@ -23,13 +24,8 @@ router.get('/signup', (req, res) => {
 router.post(
   '/signup',
   [validateSignUpEmail, validateSignUpPassword, validatePasswordConfirmation],
+  handleErrors(signupView),
   async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.send(signupView({ req, errors }));
-    }
-
     const { email, password } = req.body;
 
     const user = await usersRepo.create({ email: email, password: password });
@@ -47,12 +43,8 @@ router.get('/signin', (req, res) => {
 router.post(
   '/signin',
   [validateSignInEmail, validateSignInPassword],
+  handleErrors(signinView),
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.send(signinView({ errors }));
-    }
-
     const user = await usersRepo.getOneBy({ email: req.body.email });
     if (!user) {
       return res.send('Email not found');
