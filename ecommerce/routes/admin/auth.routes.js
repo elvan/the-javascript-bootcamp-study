@@ -31,7 +31,7 @@ router.post(
 
     req.session.userID = user.id;
 
-    res.send('Account Created!');
+    res.redirect('/admin/products');
   }
 );
 
@@ -50,13 +50,13 @@ router.post(
     }
 
     req.session.userID = user.id;
-    res.send('You are signed in');
+    res.redirect('/admin/products');
   }
 );
 
 router.get('/signout', (req, res) => {
   req.session = null;
-  res.send('You are logged out');
+  res.redirect('/');
 });
 
 module.exports = router;
