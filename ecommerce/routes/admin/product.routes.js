@@ -20,7 +20,12 @@ router.post(
   [validateTitle, validatePrice],
   (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
+
+    console.log(req.body);
+
+    if (!errors.isEmpty()) {
+      return res.send(productsNewView({ errors: errors }));
+    }
 
     res.send('Form submitted');
   }
