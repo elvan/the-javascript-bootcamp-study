@@ -73,4 +73,14 @@ router.post(
   }
 );
 
+router.post('/admin/products/:id/delete', requireAuth, async (req, res) => {
+  try {
+    await productsRepo.delete(req.params.id);
+  } catch (error) {
+    return res.send('Product not found');
+  }
+
+  res.redirect('/admin/products');
+});
+
 module.exports = router;
