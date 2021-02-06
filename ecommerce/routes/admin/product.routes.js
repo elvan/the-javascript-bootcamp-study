@@ -6,6 +6,7 @@ const multer = require('multer');
 const productsRepo = require('../../repositories/products.repository');
 const productsIndexView = require('../../views/admin/products/index.view');
 const productsNewView = require('../../views/admin/products/new.view');
+const productsEditView = require('../../views/admin/products/edit.view');
 const { validateTitle, validatePrice } = require('./products.validators');
 const { handleErrors, requireAuth } = require('./admin.middlewares');
 
@@ -35,5 +36,17 @@ router.post(
     res.redirect('/admin/products');
   }
 );
+
+router.get('/admin/products/:id/edit', requireAuth, async (req, res) => {
+  const product = await productsRepo.getOne(req.params.id);
+
+  if (!product) {
+    return res.send('Product not found');
+  }
+
+  res.send(productsEditView({ product }));
+});
+
+router.post('/admin/products/:id/edit', requireAuth, async (req, res) => {});
 
 module.exports = router;
