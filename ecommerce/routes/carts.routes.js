@@ -49,8 +49,18 @@ router.get('/cart', async (req, res) => {
   res.send(cartShowTemplate({ items: cart.items }));
 });
 
-router.post('/cart/products/delete', (req, res) => {
-  console.log(req.body.itemID);
+router.post('/cart/products/delete', async (req, res) => {
+  const { itemID } = req.body;
+  console.log(itemID);
+
+  const cart = await cartsRepo.getOne(req.session.cartID);
+
+  const items = cart.items.filter(item => item.id !== itemID);
+  console.log(items);
+
+  await cartsRepo.update(req.session.cartID, { items });
+
+  res.redirect('/cart');
 });
 
 module.exports = router;
