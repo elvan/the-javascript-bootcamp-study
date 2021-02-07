@@ -7,8 +7,9 @@ const cookieSession = require('cookie-session');
 const app = express();
 const port = 3000;
 
+const productsRouter = require('./routes/products.routes');
 const authRouter = require('./routes/admin/auth.routes');
-const productsRouter = require('./routes/admin/product.routes');
+const adminProductsRouter = require('./routes/admin/products.routes');
 
 app.use(express.static('public'));
 
@@ -19,8 +20,9 @@ app.use(
   })
 );
 
-app.use(authRouter);
 app.use(productsRouter);
+app.use(authRouter);
+app.use(adminProductsRouter);
 
 app.get('/', (req, res) => {
   res.send(`<h4>Your ID is: ${req.session.userID}</h4>`);
