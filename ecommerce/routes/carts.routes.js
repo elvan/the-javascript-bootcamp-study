@@ -3,6 +3,9 @@
 const express = require('express');
 
 const cartsRepo = require('../repositories/carts.repository');
+const productsRepo = require('../repositories/products.repository');
+const layout = require('../views/layout.template');
+const cartShowTemplate = require('../views/carts/show.template');
 
 const router = express.Router();
 
@@ -28,6 +31,22 @@ router.post('/cart/products', async (req, res) => {
   });
 
   res.send('Product added to cart');
+});
+
+router.get('/cart', async (req, res) => {
+  if (!req.session.cartID) {
+    return res.send(layout({ content: 'Your cart is empty' }));
+  }
+
+  const cart = await cartsRepo.getOne(req.session.cartID);
+  console.log(cart.items);
+
+  for (let item of cart.items) {
+    const product = await productsRepo.getOne(item.id);
+    item.product = product;
+  }
+
+  res.send(cartShowTemplate({ items: cart.items }));
 });
 
 module.exports = router;
