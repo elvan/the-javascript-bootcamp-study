@@ -1,3 +1,4 @@
+// @ts-nocheck
 const autoCompleteConfig = {
   renderOption(movie) {
     const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
@@ -12,7 +13,7 @@ const autoCompleteConfig = {
   async fetchData(searchTerm) {
     const response = await axios.get('http://www.omdbapi.com/', {
       params: {
-        apikey: 'd9835cc5',
+        apikey: '2e95ca6d',
         s: searchTerm
       }
     });
