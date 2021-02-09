@@ -11,5 +11,11 @@
   "license": "MIT",
   "bin": {
     "tme": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0"
   }
 }
