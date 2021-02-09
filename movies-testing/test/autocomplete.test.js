@@ -1,5 +1,23 @@
 // @ts-nocheck
 
+beforeEach(() => {
+  document.querySelector('#target').innerHTML = '';
+
+  createAutoComplete({
+    root: document.querySelector('#target'),
+    fetchData() {
+      return [
+        { Title: 'Avengers' },
+        { Title: 'Batman' },
+        { Title: 'Lego' },
+      ];
+    },
+    renderOption(movie) {
+      return movie.Title;
+    },
+  });
+});
+
 const waitFor = (selector) => {
   return new Promise((resolve, reject) => {
     const interval = setInterval(() => {
@@ -17,21 +35,7 @@ const waitFor = (selector) => {
   });
 };
 
-it('Shows an autocomplete', () => {
-  createAutoComplete({
-    root: document.querySelector('#target'),
-    fetchData() {
-      return [
-        { Title: 'Avengers' },
-        { Title: 'Batman' },
-        { Title: 'Lego' },
-      ];
-    },
-    renderOption(movie) {
-      return movie.Title;
-    },
-  });
-
+it('Dropdown starts closed', () => {
   const dropdown = document.querySelector('.dropdown');
 
   expect(dropdown.className).not.to.include('is-active');
