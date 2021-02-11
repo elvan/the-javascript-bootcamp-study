@@ -24,11 +24,11 @@ class Runner {
         beforeEaches.push(fn);
       };
 
-      global.it = (desc, fn) => {
+      global.it = async (desc, fn) => {
         beforeEaches.forEach(func => func());
 
         try {
-          fn();
+          await fn();
           console.log(chalk.green(`\tOK - ${desc}`));
         } catch (error) {
           const message = error.message.replace(/\n/g, '\n\t');
