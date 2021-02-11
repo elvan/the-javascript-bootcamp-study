@@ -13,7 +13,9 @@
     "tme": "index.js"
   },
   "dependencies": {
-    "chalk": "^4.1.0"
+    "@types/jsdom": "^16.2.6",
+    "chalk": "^4.1.0",
+    "jsdom": "^16.4.0"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0"
