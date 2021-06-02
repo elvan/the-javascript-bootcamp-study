@@ -1,1 +1,1 @@
-# the-javascript-bootcamp-study
+# javascript-bootcamp-study
